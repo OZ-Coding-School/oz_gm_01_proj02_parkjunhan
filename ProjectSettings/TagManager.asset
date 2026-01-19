@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Monster
+    uniqueID: 929608327
+    locked: 0
+  - name: Object
+    uniqueID: 17257871
+    locked: 0
+  - name: Npc
+    uniqueID: 2182218363
+    locked: 0
+  - name: Player
+    uniqueID: 3237330565
+    locked: 0
+  - name: Fog
+    uniqueID: 3042739735
+    locked: 0
