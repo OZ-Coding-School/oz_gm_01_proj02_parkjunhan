@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(Inventory))]
-[RequireComponent(typeof(EquipMent))]
 public class InventoryManager : MonoBehaviour
 {
     #region field
@@ -10,7 +8,7 @@ public class InventoryManager : MonoBehaviour
 
     [Header("인벤토리")]
     [SerializeField] Inventory inventory;
-    [SerializeField] EquipMent equipMent;
+    [SerializeField] Equipment equipment;
 
     private bool useItem;
     #endregion
@@ -27,8 +25,8 @@ public class InventoryManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        inventory = GetComponent<Inventory>();
-        equipMent = GetComponent<EquipMent>();
+        inventory = FindObjectOfType<Inventory>();
+        equipment = FindObjectOfType<Equipment>();
     }
 
     void Update()
@@ -64,8 +62,13 @@ public class InventoryManager : MonoBehaviour
         useItem = false;
     }
 
+    private void UseEquip(Slot slot)
+    {
+        equipment.ClickedEquip(slot);
+    }
+
     //플레이어 인벤토리
-    public void OnInventoryClicked(InventorySlot slot, PointerEventData eventData)
+    public void OnInventoryClicked(Slot slot, PointerEventData eventData)
     {
         if (slot.Item == null) return;
 
@@ -79,7 +82,7 @@ public class InventoryManager : MonoBehaviour
                     }
                     else if (slot.Item.equipment)
                     {
-                        //장비 아이템 착용
+                        UseEquip(slot);
                     }
                 }
                 break;
@@ -92,7 +95,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     //플레이어 장비창
-    public void OnEquipmentClicked(EquipSlot slot, PointerEventData eventData)
+    public void OnEquipmentClicked(Slot slot, PointerEventData eventData)
     {
         if (slot.Item == null) return;
 

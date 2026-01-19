@@ -8,13 +8,21 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] Transform slotParent;
     [SerializeField] InventorySlot[] slots;
+
+    [Header("인벤토리 UI")]
+    [SerializeField] public GameObject inventoryUI;
     #endregion
 
     void Awake()
     {
-        slots = slotParent.GetComponentsInChildren<InventorySlot>();
+        slotParent = GameObject.Find("GameObject/Canvas/InventoryUI/Scroll View/Viewport")
+            .transform.Find("Content");
 
+        slots = slotParent.GetComponentsInChildren<InventorySlot>();
         FreshSlot();
+
+        inventoryUI = GameObject.Find("Canvas").transform.Find("InventoryUI").gameObject;
+        //if (inventoryUI.gameObject.activeInHierarchy) inventoryUI.SetActive(false);
     }
 
     #region method
