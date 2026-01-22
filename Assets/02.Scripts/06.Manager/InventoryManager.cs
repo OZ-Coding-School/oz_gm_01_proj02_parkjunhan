@@ -5,10 +5,6 @@ public class InventoryManager : MonoBehaviour
 {
     #region field
     public static InventoryManager Instance { get; private set; }
-
-    [Header("인벤토리")]
-    Inventory inventory;
-    [SerializeField] Equipment equipment;
     #endregion
 
     void Awake()
@@ -22,11 +18,6 @@ public class InventoryManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        inventory = Inventory.Instance;
-
-        equipment = GameObject.Find("GameObject/Canvas/UI/PlayerUI/EquipeUI")
-            .GetComponent<Equipment>();
     }
 
     void Update()
@@ -50,7 +41,7 @@ public class InventoryManager : MonoBehaviour
 
         item.counter--;
 
-        if (item.counter <= 0) inventory.RemoveItem(item);
+        if (item.counter <= 0) Inventory.Instance.RemoveItem(item);
     }
 
     private void UseStatusRecovery(Slot slot)
@@ -65,7 +56,7 @@ public class InventoryManager : MonoBehaviour
 
     private void UseEquip(Slot slot)
     {
-        equipment.ClickedEquip(slot);
+        Equipment.Instance.AddEquipment(slot);
     }
 
     //플레이어 인벤토리
@@ -102,26 +93,6 @@ public class InventoryManager : MonoBehaviour
                         case ItemType.Etc:
                             break;
                     }
-                }
-                break;
-            case PointerEventData.InputButton.Right:
-                {
-                    //아이템 정보
-                }
-                break;
-        }
-    }
-
-    //플레이어 장비창
-    public void OnEquipmentClicked(Slot slot, PointerEventData eventData)
-    {
-        if (slot.Item == null) return;
-
-        switch (eventData.button)
-        {
-            case PointerEventData.InputButton.Left:
-                {
-                    //장비 아이템 해제
                 }
                 break;
             case PointerEventData.InputButton.Right:

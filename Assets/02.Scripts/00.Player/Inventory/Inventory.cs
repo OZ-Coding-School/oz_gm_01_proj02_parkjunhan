@@ -18,7 +18,7 @@ public class Inventory
         }
     }
 
-    private Inventory() { }
+    Inventory() { } //방어코드
 
     public List<ItemDataSO> items;
     #endregion

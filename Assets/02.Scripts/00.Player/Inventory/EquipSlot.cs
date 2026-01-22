@@ -16,9 +16,9 @@ public class EquipSlot : Slot, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (InventoryManager.Instance != null)
+        if (EquipmentManager.Instance != null)
         {
-            InventoryManager.Instance.OnEquipmentClicked(this, eventData);
+            EquipmentManager.Instance.OnEquipmentClicked(this, eventData);
         }
     }
 }

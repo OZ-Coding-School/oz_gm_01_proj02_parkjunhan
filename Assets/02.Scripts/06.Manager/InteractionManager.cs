@@ -9,7 +9,6 @@ public class InteractionManager : MonoBehaviour
     [SerializeField] GameObject playerUI;
     [SerializeField] GameObject shopUI;
     public bool isActive = false;
-    
     #endregion
 
     void Awake()

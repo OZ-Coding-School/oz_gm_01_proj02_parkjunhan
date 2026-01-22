@@ -1,4 +1,4 @@
-using UnityEngine;
+using Unity.VisualScripting;
 
 public enum EquipSlotType
 {
@@ -11,53 +11,38 @@ public enum EquipSlotType
     None
 }
 
-public class Equipment : MonoBehaviour
+public class Equipment
 {
     #region field
-    public ItemDataSO[] equipment = new ItemDataSO[6];
-    [SerializeField] Transform equipParent;
-    [SerializeField] EquipSlot[] equipSlots = new EquipSlot[6];
+    static Equipment instance;
+    public static Equipment Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new Equipment();
+            }
+            return instance;
+        }
+    }
 
-    [Header("장비탭 UI")]
-    [SerializeField] public GameObject equipmentUI;
+    Equipment() { } //방어코드
+
+    public ItemDataSO[] equipment = new ItemDataSO[6];
     #endregion
 
-    void Awake()
-    {
-        equipParent = GameObject.Find("GameObject/Canvas/UI/PlayerUI/EquipeUI")
-            .transform.Find("SlotParent");
-
-        equipSlots = equipParent.GetComponentsInChildren<EquipSlot>();
-
-        equipmentUI = GameObject.Find("GameObject/Canvas/UI/PlayerUI/EquipeUI");
-
-        WearingEquipment();
-    }
-
-    void Update()
-    {
-        
-    }
-
     #region method
-    public void WearingEquipment()
+    public void AddEquipment(Slot slot)
     {
-        if (equipment[0] == null) return;
-
-        for (int i = 0; i < equipSlots.Length; i++)
-        {
-            equipment[(int)equipSlots[i].slotType] = equipSlots[i].Item;
-        }
+        equipment[(int)slot.Item.slotType] = slot.Item;
+        EquipmentManager.Instance.needRefresh = true;
     }
 
-    public void ClickedEquip(Slot slot)
+    public void RemoveEquipment(Slot slot)
     {
-        for (int i = 0; i <equipSlots.Length; i++)
-        {
-            if (equipSlots[i] != null) continue;
-
-            equipSlots[i] = (EquipSlot)slot;
-        }
+        equipment[(int)slot.Item.slotType] = null; 
+        EquipmentManager.Instance.needRefresh = true;
     }
     #endregion
 }

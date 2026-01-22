@@ -18,7 +18,6 @@ public class InventoryUI : MonoBehaviour
         Setting();
         FreshSlot();
     }
-
     void Update()
     {
         
@@ -27,19 +26,19 @@ public class InventoryUI : MonoBehaviour
     #region method
     public void Setting()
     {
-        slotParent = GameObject.Find("GameObject/Canvas/UI/PlayerUI/InventoryUI/Scroll View/Viewport")
-            .transform.Find("Content");
+        slotParent = transform.Find("Scroll View/Viewport/Content");
 
         slots = slotParent.GetComponentsInChildren<InventorySlot>();
 
-        inventoryUI = GameObject.Find("GameObject/Canvas/UI/PlayerUI")
-            .transform.Find("InventoryUI").gameObject;
+        inventoryUI = gameObject;
 
         items = Inventory.Instance.items;
     }
 
     public void FreshSlot()
     {
+        if (items == null) return;
+
         int i = 0;
         for (; i < items.Count && i < slots.Length; i++)
         {
