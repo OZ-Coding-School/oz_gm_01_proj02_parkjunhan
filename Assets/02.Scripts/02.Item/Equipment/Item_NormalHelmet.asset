@@ -12,15 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d78c4b75b79ada4faa6f0e8274b30b8, type: 3}
   m_Name: Item_NormalHelmet
   m_EditorClassIdentifier: 
-  itemName: NormalHelmet
-  attackPower: 0
-  skillPower: 0
-  defence: 5
-  speed: -0.1
+  itemName: "\uD5C8\uB984\uD55C \uD22C\uAD6C"
   price: 250
   itemImage: {fileID: 0}
   counter: 1
-  expendables: 0
+  itemType: 3
+  itemGrade: 0
   recoveryHp: 0
   recoveryMp: 0
   bleeding: 0
@@ -29,11 +26,9 @@ MonoBehaviour:
   faint: 0
   horror: 0
   skillList: {fileID: 0}
-  equipment: 1
-  helmet: 1
-  armor: 0
-  gloves: 0
-  pants: 0
-  shoes: 0
-  weapone: 0
-  weaponeSkill: {fileID: 0}
+  slotType: 0
+  attackPower: 0
+  skillPower: 0
+  defence: 5
+  speed: -0.1
+  weaponSkill: {fileID: 0}

@@ -12,15 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d78c4b75b79ada4faa6f0e8274b30b8, type: 3}
   m_Name: Item_Spear
   m_EditorClassIdentifier: 
-  itemName: Spear
-  attackPower: 0
-  skillPower: 0
-  defence: 0
-  speed: 0
+  itemName: "\uB0A1\uC740 \uC7A5\uCC3D"
   price: 0
   itemImage: {fileID: 0}
   counter: 0
-  expendables: 0
+  itemType: 3
+  itemGrade: 0
   recoveryHp: 0
   recoveryMp: 0
   bleeding: 0
@@ -29,6 +26,9 @@ MonoBehaviour:
   faint: 0
   horror: 0
   skillList: {fileID: 0}
-  slotType: 5
-  equipment: 1
+  slotType: 0
+  attackPower: 0
+  skillPower: 0
+  defence: 0
+  speed: 0
   weaponSkill: {fileID: 0}

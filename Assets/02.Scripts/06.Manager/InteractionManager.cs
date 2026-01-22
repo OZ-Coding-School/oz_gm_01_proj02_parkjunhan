@@ -5,9 +5,11 @@ public class InteractionManager : MonoBehaviour
     #region field
     public static InteractionManager Instance { get; private set; }
 
-    [Header("상호작용 UI")]
-    [SerializeField] Equipment equipment;
-    [SerializeField] Inventory inventory;
+    [Header("CharactorUI")]
+    [SerializeField] GameObject playerUI;
+    [SerializeField] GameObject shopUI;
+    public bool isActive = false;
+    
     #endregion
 
     void Awake()
@@ -22,8 +24,9 @@ public class InteractionManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        inventory = FindObjectOfType<Inventory>(true);
-        equipment = FindObjectOfType<Equipment>(true);
+        playerUI = GameObject.Find("GameObject/Canvas/UI/PlayerUI");
+
+        if (playerUI.activeInHierarchy) playerUI.SetActive(false);
     }
 
     void Update()
@@ -36,12 +39,8 @@ public class InteractionManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            inventory.inventoryUI.SetActive(!inventory.inventoryUI.activeSelf);
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            equipment.equipmentUI.SetActive(!equipment.equipmentUI.activeSelf);
+            playerUI.SetActive(!playerUI.activeSelf);
+            isActive = !isActive;
         }
     }
     #endregion

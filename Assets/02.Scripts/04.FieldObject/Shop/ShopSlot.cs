@@ -1,18 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class ShopSlot : MonoBehaviour
+public class ShopSlot : Slot, IPointerClickHandler
 {
-    // Start is called before the first frame update
-    void Start()
+    Image coinImage;
+
+    protected override void Awake()
     {
-        
+        base.Awake();
+        coinImage = transform.Find("Image").GetComponent<Image>();
+        if (Item == null) coinImage.color = new Color(1, 1, 1, 0);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+        base.Update();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (InventoryManager.Instance != null)
+        {
+            InventoryManager.Instance.OnShopClicked(this, eventData);
+        }
     }
 }

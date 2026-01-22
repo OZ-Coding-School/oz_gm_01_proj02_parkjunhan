@@ -7,10 +7,8 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager Instance { get; private set; }
 
     [Header("인벤토리")]
-    [SerializeField] Inventory inventory;
+    Inventory inventory;
     [SerializeField] Equipment equipment;
-
-    private bool useItem;
     #endregion
 
     void Awake()
@@ -25,8 +23,10 @@ public class InventoryManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        inventory = FindObjectOfType<Inventory>();
-        equipment = FindObjectOfType<Equipment>();
+        inventory = Inventory.Instance;
+
+        equipment = GameObject.Find("GameObject/Canvas/UI/PlayerUI/EquipeUI")
+            .GetComponent<Equipment>();
     }
 
     void Update()
@@ -35,31 +35,32 @@ public class InventoryManager : MonoBehaviour
     }
 
     #region method
-    private void UseItem(Slot slot)
+    private void UseLiquidMedicine(Slot slot)
     {
-        if (slot.Item.recoveryHp > 0 && slot.Item.recoveryMp == 0)
-        {
-            if (PlayerStatus.Instance.hp < PlayerStatus.Instance.maxHp) useItem = true;
+        ItemDataSO item = slot.Item;
+        PlayerStatus player = PlayerStatus.Instance;
 
-            if (useItem)
-            {
-                PlayerStatus.Instance.ModifyHp(slot.Item.recoveryHp);
-                slot.Item.counter--;
-            }
-        }
-        else if (slot.Item.recoveryMp > 0 && slot.Item.recoveryHp == 0)
-        {
-            if (PlayerStatus.Instance.hp < PlayerStatus.Instance.maxHp) useItem = true;
+        bool canRecoverHp = item.recoveryHp > 0 && player.hp < player.maxHp;
+        bool canRecoverMp = item.recoveryMp > 0 && player.mp < player.maxMp;
 
-            if (useItem)
-            {
-                PlayerStatus.Instance.ModifyMp(slot.Item.recoveryMp);
-                slot.Item.counter--;
-            }
-        }
-        
-        if (slot.Item.counter <= 0) inventory.RemoveItem(slot.Item);
-        useItem = false;
+        if (!canRecoverHp && !canRecoverMp) return;
+
+        if (canRecoverHp) player.ModifyHp(item.recoveryHp);
+        if (canRecoverMp) player.ModifyMp(item.recoveryMp);
+
+        item.counter--;
+
+        if (item.counter <= 0) inventory.RemoveItem(item);
+    }
+
+    private void UseStatusRecovery(Slot slot)
+    {
+
+    }
+
+    private void UseExpendables(Slot slot)
+    {
+
     }
 
     private void UseEquip(Slot slot)
@@ -76,13 +77,30 @@ public class InventoryManager : MonoBehaviour
         {
             case PointerEventData.InputButton.Left:
                 {
-                    if (slot.Item.expendables)
+                    switch (slot.Item.itemType)
                     {
-                        UseItem(slot);
-                    }
-                    else if (slot.Item.equipment)
-                    {
-                        UseEquip(slot);
+                        case ItemType.LiquidMedicine:
+                            {
+                                UseLiquidMedicine(slot);
+                            }
+                            break;
+                        case ItemType.StatusRecovery:
+                            {
+                                UseStatusRecovery(slot);
+                            }
+                            break;
+                        case ItemType.Expendables:
+                            {
+                                UseExpendables(slot);
+                            }
+                            break;
+                        case ItemType.Equipment:
+                            {
+                                UseEquip(slot);
+                            }
+                            break;
+                        case ItemType.Etc:
+                            break;
                     }
                 }
                 break;
@@ -115,5 +133,23 @@ public class InventoryManager : MonoBehaviour
     }
 
     //상점 인벤토리
+    public void OnShopClicked(Slot slot, PointerEventData eventData)
+    {
+        if (slot.Item == null) return;
+
+        switch (eventData.button)
+        {
+            case PointerEventData.InputButton.Left:
+                {
+                    //아이템 구매
+                }
+                break;
+            case PointerEventData.InputButton.Right:
+                {
+                    //아이템 정보
+                }
+                break;
+        }
+    }
     #endregion
 }

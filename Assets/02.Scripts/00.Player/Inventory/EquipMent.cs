@@ -7,16 +7,16 @@ public enum EquipSlotType
     Gloves,
     Pants,
     Shoes,
-    Weapon
+    Weapon,
+    None
 }
 
 public class Equipment : MonoBehaviour
 {
     #region field
     public ItemDataSO[] equipment = new ItemDataSO[6];
+    [SerializeField] Transform equipParent;
     [SerializeField] EquipSlot[] equipSlots = new EquipSlot[6];
-
-    public Inventory inventory;
 
     [Header("¿Â∫Ò≈« UI")]
     [SerializeField] public GameObject equipmentUI;
@@ -24,9 +24,12 @@ public class Equipment : MonoBehaviour
 
     void Awake()
     {
-        inventory = GetComponent<Inventory>();
-        equipmentUI = GameObject.Find("Canvas").transform.Find("EquipeUI").gameObject;
-        if (equipmentUI.gameObject.activeInHierarchy) equipmentUI.SetActive(false);
+        equipParent = GameObject.Find("GameObject/Canvas/UI/PlayerUI/EquipeUI")
+            .transform.Find("SlotParent");
+
+        equipSlots = equipParent.GetComponentsInChildren<EquipSlot>();
+
+        equipmentUI = GameObject.Find("GameObject/Canvas/UI/PlayerUI/EquipeUI");
 
         WearingEquipment();
     }

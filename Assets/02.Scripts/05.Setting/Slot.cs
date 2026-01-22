@@ -8,6 +8,7 @@ public abstract class Slot : MonoBehaviour
     [SerializeField] Image itemImage;
     [SerializeField] TextMeshProUGUI itemName;
     [SerializeField] TextMeshProUGUI itemCounter;
+    [SerializeField] TextMeshProUGUI itemPrice;
 
     ItemDataSO _item;
     public ItemDataSO Item
@@ -16,9 +17,9 @@ public abstract class Slot : MonoBehaviour
         set
         {
             _item = value;
-            Debug.Log($"itemImage's null? {itemImage == null}");
             if (_item != null)
             {
+                Debug.Log("test");
                 if (_item.itemImage != null)
                 {
                     itemImage.sprite = Item.itemImage;
@@ -47,13 +48,19 @@ public abstract class Slot : MonoBehaviour
                 {
                     itemCounter.text = "";
                 }
+
+                if (_item.price > 1)
+                {
+                    itemPrice.text = "" + _item.price;
+                }
+                else
+                {
+                    itemPrice.text = "";
+                }
             }
             else
             {
-                //itemImage.sprite = null;
-                itemImage.color = new Color(1, 1, 1, 0);
-                itemName.text = "";
-                itemCounter.text = "";
+                ClearUI();
             }
         }
     }
@@ -61,13 +68,8 @@ public abstract class Slot : MonoBehaviour
 
     protected virtual void Awake()
     {
-        itemImage = transform.Find("ItemImage").GetComponent<Image>();
-        itemName = transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
-        itemCounter = transform.Find("ItemCounter").GetComponent<TextMeshProUGUI>();
-
-        if (itemImage != null) itemImage.raycastTarget = false;
-        if (itemName != null) itemName.raycastTarget = false;
-        if (itemCounter != null) itemCounter.raycastTarget = false;
+        Setting();
+        RefreshUI();
     }
 
     protected virtual void Update()
@@ -78,4 +80,43 @@ public abstract class Slot : MonoBehaviour
             if (_item.counter > 0) itemCounter.text = "" + _item.counter;
         }
     }
+
+    #region method
+    void Setting()
+    {
+        itemImage = transform.Find("ItemImage").GetComponent<Image>();
+        itemName = transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
+
+        Transform counter = transform.Find("ItemCounter");
+        if (counter != null) itemCounter = transform.Find("ItemCounter").GetComponent<TextMeshProUGUI>();
+        Transform price = transform.Find("ItemPrice");
+        if (price != null) itemPrice = transform.Find("ItemPrice").GetComponent<TextMeshProUGUI>();
+
+        if (itemImage != null) itemImage.raycastTarget = false;
+        if (itemName != null) itemName.raycastTarget = false;
+        if (itemCounter != null) itemCounter.raycastTarget = false;
+        if (itemPrice != null) itemPrice.raycastTarget = false;
+    }
+
+    void RefreshUI()
+    {
+        if (_item == null)
+        {
+            ClearUI();
+            return;
+        }
+    }
+
+    void ClearUI()
+    {
+        if (itemImage != null)
+        {
+            itemImage.sprite = null;
+            itemImage.color = new Color(1, 1, 1, 0);
+        }
+        if (itemName != null) itemName.text = "";
+        if (itemCounter != null) itemCounter.text = "";
+        if (itemPrice != null) itemPrice.text = "";
+    }
+    #endregion
 }

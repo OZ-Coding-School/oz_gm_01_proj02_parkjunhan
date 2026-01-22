@@ -1,45 +1,29 @@
 using System.Collections.Generic;
-using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory
 {
     #region field
+    //C# ΩÃ±€≈Ê ∆–≈œ : https://math-development-geometry.tistory.com/58
+    static Inventory instance;
+    public static Inventory Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new Inventory();
+            }
+
+            return instance;
+        }
+    }
+
+    private Inventory() { }
+
     public List<ItemDataSO> items;
-
-    [SerializeField] Transform slotParent;
-    [SerializeField] InventorySlot[] slots;
-
-    [Header("¿Œ∫•≈‰∏Æ UI")]
-    [SerializeField] public GameObject inventoryUI;
     #endregion
 
-    void Awake()
-    {
-        slotParent = GameObject.Find("GameObject/Canvas/InventoryUI/Scroll View/Viewport")
-            .transform.Find("Content");
-
-        slots = slotParent.GetComponentsInChildren<InventorySlot>();
-        FreshSlot();
-
-        inventoryUI = GameObject.Find("Canvas").transform.Find("InventoryUI").gameObject;
-        //if (inventoryUI.gameObject.activeInHierarchy) inventoryUI.SetActive(false);
-    }
-
     #region method
-    public void FreshSlot()
-    {
-        int i = 0;
-        for (; i < items.Count && i < slots.Length; i++)
-        {
-            slots[i].Item = items[i];
-        }
-
-        for (; i < slots.Length; i++)
-        {
-            slots[i].Item = null;
-        }
-    }
-
     public void AddItem(ItemDataSO item)
     {
         ItemDataSO duplication = null;
@@ -61,8 +45,6 @@ public class Inventory : MonoBehaviour
         {
             items.Add(item);
         }
-
-        FreshSlot();
     }
 
     public void RemoveItem(ItemDataSO item)
@@ -70,7 +52,6 @@ public class Inventory : MonoBehaviour
         if (item == null) return;
 
         items.Remove(item);
-        FreshSlot();
     }
     #endregion
 }

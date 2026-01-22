@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
@@ -7,14 +6,21 @@ public class PlayerStatus : MonoBehaviour
     public static PlayerStatus Instance { get; private set; }
 
     [Header("Ω∫≈›")]
-    public float maxHp = 30.0f;
-    public float hp = 30.0f;
-    public float maxMp = 20.0f;
-    public float mp = 20.0f;
-    public int damage = 5;
-    public int skillDamage = 0;
-    public int defense = 0;
-    public int speed = 10;
+    public float maxHp = 20.0f;
+    public float hp = 20.0f;
+    public float maxMp = 15.0f;
+    public float mp = 15.0f;
+
+    public int strength = 1;
+    public int dexterity = 1;
+    public int intellect = 1;
+    public int luck = 1;
+
+    [Header("¿Â∫ÒΩ∫≈›")]
+    public int attackPower;
+    public int skillPower;
+    public int defence;
+    public int speed;
 
     [Header("ªÛ≈¬¿ÃªÛ")]
     public bool bleeding;
