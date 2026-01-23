@@ -20,9 +20,9 @@ public class ShopSlot : Slot, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (InventoryManager.Instance != null)
+        if (ShopManager.Instance != null)
         {
-            InventoryManager.Instance.OnShopClicked(this, eventData);
+            ShopManager.Instance.OnShopClicked(this, eventData);
         }
     }
 }

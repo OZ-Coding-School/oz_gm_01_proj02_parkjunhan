@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Item_CommonMpPotion
   m_EditorClassIdentifier: 
   itemName: "\uC791\uC740 \uB9C8\uB098 \uD3EC\uC158"
-  price: 20
   itemImage: {fileID: 0}
   counter: 1
+  price: 20
+  sellPrice: 0
   itemType: 0
   itemGrade: 0
   recoveryHp: 0
@@ -32,3 +33,4 @@ MonoBehaviour:
   defence: 0
   speed: 0
   weaponSkill: {fileID: 0}
+  info: "\uB9C8\uB098\uB97C <color=#e2a2b9>8</color> \uD68C\uBCF5\uD55C\uB2E4"

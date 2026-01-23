@@ -62,4 +62,7 @@ public class ItemDataSO : ScriptableObject
 
     //무기 스킬
     public SkillList weaponSkill;
+
+    [Header("아이템 설명")]
+    public string info;
 }

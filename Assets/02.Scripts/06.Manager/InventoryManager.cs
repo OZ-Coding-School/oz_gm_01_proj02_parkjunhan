@@ -102,25 +102,5 @@ public class InventoryManager : MonoBehaviour
                 break;
         }
     }
-
-    //상점 인벤토리
-    public void OnShopClicked(Slot slot, PointerEventData eventData)
-    {
-        if (slot.Item == null) return;
-
-        switch (eventData.button)
-        {
-            case PointerEventData.InputButton.Left:
-                {
-                    //아이템 구매
-                }
-                break;
-            case PointerEventData.InputButton.Right:
-                {
-                    //아이템 정보
-                }
-                break;
-        }
-    }
     #endregion
 }

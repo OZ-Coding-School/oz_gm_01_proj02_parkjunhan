@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Item_CommonHpPotion
   m_EditorClassIdentifier: 
   itemName: "\uC791\uC740 \uCCB4\uB825 \uD3EC\uC158"
-  price: 30
   itemImage: {fileID: 0}
   counter: 1
+  price: 30
+  sellPrice: 0
   itemType: 0
   itemGrade: 0
   recoveryHp: 10
@@ -32,3 +33,4 @@ MonoBehaviour:
   defence: 0
   speed: 0
   weaponSkill: {fileID: 0}
+  info: "\uCCB4\uB825\uC744 <color=#e2a2b9>10</color> \uD68C\uBCF5\uD55C\uB2E4"
