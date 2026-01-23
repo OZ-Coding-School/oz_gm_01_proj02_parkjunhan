@@ -45,8 +45,14 @@ public class EquipmentUI : MonoBehaviour
 
         for (int i = 0; i < equipSlots.Length; i++)
         {
-            //equipment[i]가 null일 경우 null reference 먼저 equipment[i]가 null인지 체크
-            equipSlots[(int)equipment[i].slotType].Item = equipment[i];
+            if (equipment[i] != null)
+            {
+                equipSlots[(int)equipment[i].slotType].Item = equipment[i];
+            }
+            else if (equipment[i] == null)
+            {
+                equipSlots[i] = null;
+            }
         }
     }
     #endregion

@@ -6,7 +6,8 @@ public enum ItemType
     StatusRecovery,
     Expendables,
     Equipment,
-    Etc
+    Etc,
+    None
 }
 
 public enum ItemGrade
@@ -15,7 +16,8 @@ public enum ItemGrade
     Uncommon,
     Rare,
     Epic,
-    Legendary
+    Legendary,
+    None
 }
 
 [CreateAssetMenu(fileName = "Item_", menuName = "Add Item/Item")]
@@ -23,9 +25,10 @@ public class ItemDataSO : ScriptableObject
 {
     [Header("기본 정보")]
     public string itemName;
-    public int price;
     public Sprite itemImage;
     public int counter; //판매 갯수
+    public int price;
+    public int sellPrice; //구매가의 1/8 : 소수점 절삭
 
     [Header("아이템 종류")]
     public ItemType itemType;
