@@ -57,6 +57,9 @@ public class ItemInfo : MonoBehaviour
     //인벤토리
 
     //장비
+
+    //UI체크용 변수
+    Slot checkSlot = null;
     #endregion
 
     void Awake()
@@ -66,7 +69,12 @@ public class ItemInfo : MonoBehaviour
 
     void Update()
     {
-        
+        CheckUI();
+
+        if (selectItem != null)
+        {
+
+        }
     }
 
     #region method
@@ -127,6 +135,32 @@ public class ItemInfo : MonoBehaviour
         //인벤토리
 
         //장비
+    }
+
+    public void CheckUI()
+    {
+        if (checkSlot == null) return;
+
+        if (ShopManager.Instance.shopSlot != null) checkSlot = ShopManager.Instance.shopSlot;
+
+        switch (checkSlot)
+        {
+            case ShopSlot:
+                {
+
+                }
+                break;
+            case InventorySlot:
+                {
+
+                }
+                break;
+            case EquipSlot:
+                {
+
+                }
+                break;
+        }
     }
 
     public void ShopActiveUI()
@@ -229,6 +263,16 @@ public class ItemInfo : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public void InventoryActiveUI()
+    {
+
+    }
+
+    public void EquipActiveUI()
+    {
+
     }
 
     public void WFontColor(ItemDataSO check)

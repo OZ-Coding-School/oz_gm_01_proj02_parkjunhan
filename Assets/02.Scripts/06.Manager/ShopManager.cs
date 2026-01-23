@@ -4,25 +4,23 @@ using UnityEngine.EventSystems;
 public class ShopManager : MonoBehaviour
 {
     #region field
-    static ShopManager instance;
-    public static ShopManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = new ShopManager();
-            }
-            return instance;
-        }
-    }
+    public static ShopManager Instance;
 
-    ShopManager() { } //방어코드
+    //아이템 정보 UI
+    public ShopSlot shopSlot;
     #endregion
 
     void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Update()
@@ -31,7 +29,7 @@ public class ShopManager : MonoBehaviour
     }
 
     #region method
-    public void OnShopClicked(Slot slot, PointerEventData eventData)
+    public void OnShopClicked(ShopSlot slot, PointerEventData eventData)
     {
         if (slot.Item == null) return;
 
@@ -46,6 +44,7 @@ public class ShopManager : MonoBehaviour
             case PointerEventData.InputButton.Right:
                 {
                     //아이템 정보
+                    shopSlot = slot;
                 }
                 break;
         }

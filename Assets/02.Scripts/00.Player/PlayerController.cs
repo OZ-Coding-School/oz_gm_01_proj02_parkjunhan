@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 [RequireComponent (typeof(Animator))]
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!InteractionManager.Instance.isActive)
+        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             Move();
         }

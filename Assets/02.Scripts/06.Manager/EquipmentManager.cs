@@ -35,7 +35,7 @@ public class EquipmentManager : MonoBehaviour
 
     #region method
     //플레이어 장비창
-    public void OnEquipmentClicked(Slot slot, PointerEventData eventData)
+    public void OnEquipmentClicked(EquipSlot slot, PointerEventData eventData)
     {
         if (slot.Item == null) return;
 

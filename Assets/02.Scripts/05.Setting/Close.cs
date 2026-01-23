@@ -14,13 +14,11 @@ public class Close : MonoBehaviour
     public void ClosePlayerUI()
     {
         playerUI.SetActive(false);
-        InteractionManager.Instance.isActive = !InteractionManager.Instance.isActive;
     }
 
     public void CloseShopUI()
     {
         playerUI.SetActive(false);
         shopUI.SetActive(false);
-        InteractionManager.Instance.isActive = !InteractionManager.Instance.isActive;
     }
 }

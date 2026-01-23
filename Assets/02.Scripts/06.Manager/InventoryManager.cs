@@ -60,7 +60,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     //플레이어 인벤토리
-    public void OnInventoryClicked(Slot slot, PointerEventData eventData)
+    public void OnInventoryClicked(InventorySlot slot, PointerEventData eventData)
     {
         if (slot.Item == null) return;
 

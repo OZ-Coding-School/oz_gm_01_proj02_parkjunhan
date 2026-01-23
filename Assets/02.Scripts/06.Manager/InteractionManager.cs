@@ -8,7 +8,6 @@ public class InteractionManager : MonoBehaviour
     [Header("CharactorUI")]
     [SerializeField] GameObject playerUI;
     [SerializeField] GameObject shopUI;
-    public bool isActive = false;
     #endregion
 
     void Awake()
@@ -24,8 +23,10 @@ public class InteractionManager : MonoBehaviour
         }
 
         playerUI = GameObject.Find("GameObject/Canvas/UI/PlayerUI");
+        shopUI = GameObject.Find("GameObject/Canvas/UI/ShopUI");
 
         if (playerUI.activeInHierarchy) playerUI.SetActive(false);
+        if (shopUI.activeInHierarchy) shopUI.SetActive(false);
     }
 
     void Update()
@@ -39,7 +40,13 @@ public class InteractionManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             playerUI.SetActive(!playerUI.activeSelf);
-            isActive = !isActive;
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            shopUI.SetActive(!shopUI.activeSelf);
+            if (!playerUI.activeSelf) playerUI.SetActive(true);
+            if (!shopUI.activeSelf) playerUI.SetActive(false);
         }
     }
     #endregion

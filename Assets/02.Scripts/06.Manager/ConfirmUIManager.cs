@@ -30,6 +30,8 @@ public class ConfirmUIManager : MonoBehaviour
         //장비탭 UI 및 구성요소
         equipmentUI = GameObject.Find("ConfirmUI/Equipment");
         equipmentSubText = GameObject.Find("ConfirmUI/Equipment/SubText").GetComponent<TextMeshProUGUI>();
+
+        if (equipmentUI.activeInHierarchy) equipmentUI.SetActive(false);
     }
 
     public void Request()
