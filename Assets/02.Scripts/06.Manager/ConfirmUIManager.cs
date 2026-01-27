@@ -46,6 +46,16 @@ public class ConfirmUIManager : MonoBehaviour
 
             equipmentUI.SetActive(true);
         }
+
+        if (InventoryManager.Instance.needConfirm)
+        {
+            itemType = InventoryManager.Instance.type;
+            itemGrade = InventoryManager.Instance.grade;
+            FontColor();
+            TypeCheck();
+
+            equipmentUI.SetActive(true);
+        }
     }
 
     //타입 체크 후 해당 타입 UI 셋팅
@@ -70,8 +80,17 @@ public class ConfirmUIManager : MonoBehaviour
                 break;
             case ItemType.Equipment:
                 {
-                    equipmentSubText.text = $"<color={colorCode}>{EquipmentManager.Instance.selectItemName}</color>" +
-                        $" 장비를 해제합니다.";
+                    if (EquipmentManager.Instance.needConfirm)
+                    {
+                        equipmentSubText.text = $"<color={colorCode}>" +
+                            $"{EquipmentManager.Instance.selectItemName}</color>" +
+                            $" 장비를 해제합니다.";
+                    }
+
+                    if (InventoryManager.Instance.needConfirm)
+                    {
+
+                    }
                 }
                 break;
             case ItemType.Etc:
@@ -103,9 +122,19 @@ public class ConfirmUIManager : MonoBehaviour
                 break;
             case ItemType.Equipment:
                 {
-                    EquipmentManager.Instance.selectY = true;
-                    EquipmentManager.Instance.needConfirm = false;
-                    equipmentUI.SetActive(false);
+                    if (EquipmentManager.Instance.needConfirm)
+                    {
+                        EquipmentManager.Instance.selectY = true;
+                        EquipmentManager.Instance.needConfirm = false;
+                        equipmentUI.SetActive(false);
+                    }
+
+                    if (InventoryManager.Instance.needConfirm)
+                    {
+                        InventoryManager.Instance.selectY = true;
+                        InventoryManager.Instance.needConfirm = false;
+                        equipmentUI.SetActive(false);
+                    }
                 }
                 break;
             case ItemType.Etc:
@@ -114,7 +143,6 @@ public class ConfirmUIManager : MonoBehaviour
                 }
                 break;
         }
-
     }
 
     public void ClickedN()

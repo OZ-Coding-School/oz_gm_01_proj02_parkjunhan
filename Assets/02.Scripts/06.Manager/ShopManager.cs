@@ -25,7 +25,10 @@ public class ShopManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetMouseButton(0) && EventSystem.current.IsPointerOverGameObject())
+        {
+            shopSlot = null;
+        }
     }
 
     #region method

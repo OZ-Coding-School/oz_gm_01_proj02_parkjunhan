@@ -70,11 +70,7 @@ public class ItemInfo : MonoBehaviour
     void Update()
     {
         CheckUI();
-
-        if (selectItem != null)
-        {
-
-        }
+        if (checkSlot == null) Initialization();
     }
 
     #region method
@@ -147,17 +143,17 @@ public class ItemInfo : MonoBehaviour
         {
             case ShopSlot:
                 {
-
+                    ShopActiveUI();
                 }
                 break;
             case InventorySlot:
                 {
-
+                    InventoryActiveUI();
                 }
                 break;
             case EquipSlot:
                 {
-
+                    EquipActiveUI();
                 }
                 break;
         }
@@ -339,6 +335,19 @@ public class ItemInfo : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public void Initialization()
+    {
+        //상점 UI
+        if (liquidMedicineUI.activeSelf) liquidMedicineUI.SetActive(false);
+        if (statusRecoveryUI.activeSelf) statusRecoveryUI.SetActive(false);
+        if (expendablesUI.activeSelf) expendablesUI.SetActive(false);
+        if (equipmentTypeUI.activeSelf) equipmentTypeUI.SetActive(false);
+
+        //인벤토리 UI
+
+        //장비 UI
     }
     #endregion
 }

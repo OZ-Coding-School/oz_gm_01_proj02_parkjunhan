@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -5,6 +6,17 @@ public class InventoryManager : MonoBehaviour
 {
     #region field
     public static InventoryManager Instance { get; private set; }
+
+    //확인절차
+    public bool needConfirm = false;
+    public bool selectY = false;
+
+    //선택된 아이템 정보
+    public ItemType type = ItemType.None;
+    public ItemGrade grade = ItemGrade.None;
+    public TextMeshProUGUI selectItemName;
+    public int price;
+    public int sellPrice;
     #endregion
 
     void Awake()
@@ -64,6 +76,12 @@ public class InventoryManager : MonoBehaviour
     {
         if (slot.Item == null) return;
 
+        type = slot.Item.itemType;
+        grade = slot.Item.itemGrade;
+        selectItemName.text = slot.Item.itemName;
+        price = slot.Item.price;
+        sellPrice = slot.Item.sellPrice;
+
         switch (eventData.button)
         {
             case PointerEventData.InputButton.Left:
@@ -72,22 +90,30 @@ public class InventoryManager : MonoBehaviour
                     {
                         case ItemType.LiquidMedicine:
                             {
-                                UseLiquidMedicine(slot);
+                                needConfirm = true;
+                                if (selectY) UseLiquidMedicine(slot);
+                                selectY = false;
                             }
                             break;
                         case ItemType.StatusRecovery:
                             {
-                                UseStatusRecovery(slot);
+                                needConfirm = true;
+                                if (selectY) UseStatusRecovery(slot);
+                                selectY = false;
                             }
                             break;
                         case ItemType.Expendables:
                             {
-                                UseExpendables(slot);
+                                needConfirm = true;
+                                if (selectY) UseExpendables(slot);
+                                selectY = false;
                             }
                             break;
                         case ItemType.Equipment:
                             {
-                                UseEquip(slot);
+                                needConfirm = true;
+                                if (selectY) UseEquip(slot);
+                                selectY = false;
                             }
                             break;
                         case ItemType.Etc:

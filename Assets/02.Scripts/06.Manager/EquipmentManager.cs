@@ -39,17 +39,16 @@ public class EquipmentManager : MonoBehaviour
     {
         if (slot.Item == null) return;
 
+        type = slot.Item.itemType;
+        grade = slot.Item.itemGrade;
+        selectItemName.text = slot.Item.itemName;
+        price = slot.Item.price;
+        sellPrice = slot.Item.sellPrice;
+
         switch (eventData.button)
         {
             case PointerEventData.InputButton.Left:
                 {
-                    //slot의 아이탬 정보
-                    type = slot.Item.itemType;
-                    grade = slot.Item.itemGrade;
-                    selectItemName.text = slot.Item.itemName;
-                    price = slot.Item.price;
-                    sellPrice = slot.Item.sellPrice;
-
                     //확인의사 UI 활성화
                     needConfirm = true;
 
